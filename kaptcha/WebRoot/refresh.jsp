@@ -31,7 +31,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			String parm = (String) request.getParameter("kaptchafield");
 			out.println("Parameter: " + parm + " ? Session Key: " + c + " : ");
 			if (c != null && parm != null) {
-				if (c.equals(parm)) {
+				if (c.equalsIgnoreCase(parm)) {
 					out.println("<b>true</b>");
 				} else {
 					out.println("<b>false</b>");
