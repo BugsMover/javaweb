@@ -5,7 +5,7 @@
 <title>注册页面</title>
   </head>
   <script type="text/javascript">
-      function checkForm() {
+        function checkForm() {
 		var usernametip = checkusername();
 		var passwordtip = checkpassword();
 		var repasswordtip = checkrepassword();
@@ -16,33 +16,74 @@
 	}
       function checkusername(){
     	  var username = document.getElementById('username');
-    	  var usernameerr = document.getElementById('usernameerr')
+    	  var usernamespan = document.getElementById('usernamespan')
     	  var pattern = /^\w{3,}$/;  //用户名格式正则表达式：用户名要至少三位
     	  if(username.value.length == 0){
-    		  usernameerr.innerHTML="用户不能为空！"
+    		  usernmespan.innerHTML="用户名不能为空！"
     		 return false;
     	  }else if(!pattern.test(username.value)){
-    		  usernameerr.innerHTML="用户不规范！"
+    		  usernamespan.innerHTML="用户名不规范！"
     		  return false;
     	  }else{
+    		  usernamespan.innerHTML="OK"
     		  return true;
     	  }
       }
+      function checkpassword(){
+    	  var password = document.getElementById('password');
+    	  var passwordspan = document.getElementById('passwordspan');
+    	  var pattern = /^\w{6,16}$/; //密码格式正则表达式；密码六位到十六位
+    	  if(password.value.length == 0){
+    		  passwordspan.innerHTML = "密码不能为空！"
+    		  return false;
+    	  }else if(!pattern.test(password.value)){
+    		  passwordspan.innerHTML="密码不规范！"
+    		  return false;
+    	  }else{
+    		  passwordspan.innerHTML="OK"
+    		  return true;
+    	  }
+      }
+      function checkrepassword(){
+    	  var repassword = document.getElementById('repassword');
+    	  var password = document.getElementById('password');
+    	  var repasswordspan = document.getElementById('repasswordspan');
+    	  if(password.value != repassword.value || repassword.value.length  == 0){
+    		  repasswordspan.innerHTML = "上下密码不正确！"
+    		  return false;
+    	  }else{
+    		  repasswordspan.innerHTML = "OK"
+    		  return true;
+    	  }
+      }
+      function checkphonenumber(){
+    	  var phonenumber = document.getElementById('phonenumber');
+    	  var phonenumberspan = document.getElementById('phonenumberspan');
+    	  var pattern = /^1[34578]\d{9}$/; //验证手机号码正则表达式
+    	  if(!pattern.test(phonenumber.value)){
+    		  phonenumberspan.innerHTML = "手机号码不规范"
+    		  return false;
+    	  }else{
+    		  phonenumberspan.innerHTML ="OK"
+    		  return true;
+    	  }
+      }
+        
   </script>
   <body>
-		<form action="#" onSubmit="reture checkForm()" method="post">
-			用户名：<input type="text" name="username" maxlength="20" onBlur="checkusername()" required><span class="default" id="usernameerr">请输入3位用户名</span><br> 
-			密    码：<input type="password" name="password" maxlength="16" onBlur="checkpassword()" required><span>请输入至少8到16位密码</span><br> 
-			确认密码：<input type="password" name="repassword" maxlength="16" onBlur="checkrepasswork" required><span>请再输入一遍密码</span><br>
-			性      别：<input type="radio" name="sex">男&nbsp;
-			     <input type="radio" name="sex">女<span></span><br> 
-			年     龄：<input type="number" name="age" maxlength="3" min="0" max="150" size="3" 
+		<form action="#" onSubmit="return checkForm()" method="post">
+			用户名：<input type="text" id="username" class="username" maxlength="20" onBlur="checkusername()" oninput="checkusername()" required><span class="default" id="usernamespan">请输入3位用户名</span><br> 
+			密    码：<input type="password" id="password"  maxlength="16" onBlur="checkpassword()" oninput="checkpassword()" required><span class=default id="passwordspan">请输入至少8到16位密码</span><br> 
+			确认密码：<input type="password" id="repassword" maxlength="16" onBlur="checkrepasswork" oninput="checkrepassword()" required><span class="default" id="repasswordspan">请再输入一遍密码</span><br>
+			性      别：<input type="radio" id="sex">男&nbsp;
+			     <input type="radio" id="sex">女<span></span><br> 
+			年     龄：<input type="number" id="age" maxlength="3" min="0" max="150" size="3" 
 			onkeyup="this.value=this.value.replace(/\D/g,'')" onBlur="checkage()"><span></span><br> 
-			手机号码：<input type="number" name="phonenumber" maxlength="11"
-			onkeyup="this.value=this.value.replace(/\D/g,'')" onBlur="checkphonenumber()" required><span>请输入11位手机号码</span><br>
-			电子邮箱：<input type="email" name="email" maxlength="30" onBlur="checkemail()" required><span>请输入邮箱地址</span><br> 
-			验证码：<input type="text" name="yzmimg" size="4" maxlength="4" required><span></span><img alt="" src=""><br> 
-			<input type="radio" name="terms" required>我同意XXXX相关条款<br>
+			手机号码：<input type="number" id="phonenumber" maxlength="11"
+			onkeyup="this.value=this.value.replace(/\D/g,'')" onBlur="checkphonenumber()" oninput="checkphonenumber()" ><span id="phonenumberspan">请输入11位手机号码</span><br>
+			电子邮箱：<input type="email" id="email" maxlength="30" onBlur="checkemail()" ><span>请输入邮箱地址</span><br> 
+			验证码：<input type="text" id="yzmimg" size="4" maxlength="4" required><span></span><img alt="" src=""><br> 
+			<input type="radio" id="terms" required>我同意XXXX相关条款<br>
 			<textarea rows="6" cols="80" readonly="readonly">
 一、遵守中华人民共和国有关法律、法规，承担一切因您的行为而直接或间接引起的法律责任。
 二、发贴请注意以下几条规定，若有违反，本论坛有权删除。
