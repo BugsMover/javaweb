@@ -7,8 +7,9 @@
 <title>Insert title here</title>
 </head>
 <body>
-ÕË»§£º<%=request.getParameter("username") %><br/>
-ÃÜÂë£º<%=request.getParameter("password") %>
+ÕË»§£º<%=request.getAttribute("username") %>  <%--null --%>
+ ÕË»§£º    ${username}
+ÃÜÂë£º<%=request.getParameter("password") %>  
 
 
 </body>
