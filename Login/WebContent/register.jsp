@@ -93,9 +93,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     	  //验证码切换
     		document.getElementById("Kaptcha").src="<%=basePath%>Kaptcha.jpg?data="+Math.random();
     	}
-     /** function checkkaptcha(){
+      
+      function checkkaptcha(){
     	  //验证码检验
-    	  String key = (String)session.getAttribute(com.google.code.kaptcha.Constants.KAPTCHA_SESSION_KEY);
+    	  <% String key = (String)session.getAttribute(com.google.code.kaptcha.Constants.KAPTCHA_SESSION_KEY); %>
     	  var kaptcha = document.getElementById("kaptcha");
     	  var kaptchaspan = document.getElementById("kaptchaspan");
     	  if(key!=null && kaptcha != null){
@@ -110,12 +111,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     		  kaptchaspan.innerHTML = "验证码不能为空！"
     		  return false;
     	  }
-      }**/
+      }
         
   </script>
 <body>
 <form action="#" onSubmit="return checkForm()" method="post">
-		<!-- 	用户名：<input type="text" id="username" class="username" maxlength="20" onBlur="checkusername()" oninput="checkusername()" required><span class="default" id="usernamespan">请输入3位用户名</span><br> 
+			用户名：<input type="text" id="username" class="username" maxlength="20" onBlur="checkusername()" oninput="checkusername()" required><span class="default" id="usernamespan">请输入3位用户名</span><br> 
 			密    码：<input type="password" id="password"  maxlength="16" onBlur="checkpassword()" oninput="checkpassword()" required><span class=default id="passwordspan">请输入至少8到16位密码</span><br> 
 			确认密码：<input type="password" id="repassword" maxlength="16" onBlur="checkrepasswork" oninput="checkrepassword()" required><span class="default" id="repasswordspan">请再输入一遍密码</span><br>
 			性      别：<input type="radio" id="sex">男&nbsp;
@@ -124,8 +125,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			onkeyup="this.value=this.value.replace(/\D/g,'')" onBlur="checkage()"><span></span><br> 
 			手机号码：<input type="number" id="phonenumber" maxlength="11"
 			onkeyup="this.value=this.value.replace(/\D/g,'')" onBlur="checkphonenumber()" oninput="checkphonenumber()" ><span id="phonenumberspan">请输入11位手机号码</span><br>
-		 -->	电子邮箱：<input type="email" id="email" maxlength="30" onBlur="checkemail()" oninput="checkemail()"><span id="emailspan">请输入邮箱地址</span><br> 
-			验证码：<input type="text" name="kaptcha" id="kaptcha" size="4" maxlength="4" onBlur="checkkaptcha()" oninput="checkkaptcha()" required><span id="kaptchaspan"></span>
+		 	电子邮箱：<input type="email" id="email" maxlength="30" onBlur="checkemail()" oninput="checkemail()"><span id="emailspan">请输入邮箱地址</span><br> 
+			验证码：<input type="text"  id="kaptcha" size="4" maxlength="4" onBlur="checkkaptcha()" oninput="checkkaptcha()" required><span id="kaptchaspan">!!!</span>
 			<img id="Kaptcha" src="<%=basePath%>Kaptcha.jpg" onclick="refImg()"><a href="javascript:void(0)" onclick="refImg()">看不清，点击刷新！</a><br> 
 			<input type="radio" id="terms" required>我同意XXXX相关条款<br>
 			<textarea rows="6" cols="80" readonly="readonly">
