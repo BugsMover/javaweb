@@ -1,6 +1,8 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<%
+String path = request.getContextPath();
+String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+%>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -14,7 +16,8 @@
 		var agetip = checkage();
 		var phonenumbertip = checkphonenumber();
 		var emailtip = checkemail();
-		return usernametip && passwordtip && repasswordtip  && agetip && phonenumbertip && emailtip;
+		var kaptchatip = chenckkaptcha();
+		return usernametip && passwordtip && repasswordtip  && agetip && phonenumbertip && emailtip && kaptchatip;
 	}
       function checkusername(){
     	  var username = document.getElementById('username');
@@ -82,6 +85,28 @@
     		  return true;
     	  }
       }
+      function refImg(){
+    	  //验证码切换
+    		document.getElementById("kaptchaimg").src="<%=basePath%>Kaptcha.jpg?data="+Math.random();
+    	}
+     /** function checkkaptcha(){
+    	  //验证码检验
+    	  String key = (String)session.getAttribute(com.google.code.kaptcha.Constants.KAPTCHA_SESSION_KEY);
+    	  var kaptcha = document.getElementById("kaptcha");
+    	  var kaptchaspan = document.getElementById("kaptchaspan");
+    	  if(key!=null && kaptcha != null){
+    		  if(key.equalsIgnoreCase(kaptcha)){
+    			  kaptchaspan.innerHTML = "OK"
+    			  return true;
+    		  }else{
+    			  kaptchaspan.innerHTML = "验证码有误！"
+    			  return false;
+    		  }
+    	  }else{
+    		  kaptchaspan.innerHTML = "验证码不能为空！"
+    		  return false;
+    	  }
+      }**/
         
   </script>
 <body>
@@ -96,7 +121,7 @@
 			手机号码：<input type="number" id="phonenumber" maxlength="11"
 			onkeyup="this.value=this.value.replace(/\D/g,'')" onBlur="checkphonenumber()" oninput="checkphonenumber()" ><span id="phonenumberspan">请输入11位手机号码</span><br>
 			电子邮箱：<input type="email" id="email" maxlength="30" onBlur="checkemail()" oninput="checkemail()"><span id="emailspan">请输入邮箱地址</span><br> 
-			验证码：<input type="text" id="yzmimg" size="4" maxlength="4" required><span></span><img alt="" src=""><br> 
+			验证码：<img id="Kaptcha" src="<%=basePath%>Kaptcha.jpg" onclick="refImg()"><input type="text" name="kaptcha" id="kaptcha" size="4" maxlength="4" onBlur=checkkaptcha(); oninput="checkkaptcha()" required><span id="kaptchaspan"></span><br> 
 			<input type="radio" id="terms" required>我同意XXXX相关条款<br>
 			<textarea rows="6" cols="80" readonly="readonly">
 一、遵守中华人民共和国有关法律、法规，承担一切因您的行为而直接或间接引起的法律责任。
@@ -126,5 +151,17 @@
 			</textarea><br>
 			<input type="submit" value="提交" ><input type="reset" value="重置">
 		</form>
+		<%
+			String c = (String)session.getAttribute(com.google.code.kaptcha.Constants.KAPTCHA_SESSION_KEY);
+			String parm = (String) request.getParameter("kaptchafield");
+			out.println("Parameter: " + parm + " ? Session Key: " + c + " : ");
+			if (c != null && parm != null) {
+				if (c.equalsIgnoreCase(parm)) {
+					out.println("<b>true</b>");
+				} else {
+					out.println("<b>false</b>");
+				}
+			}
+		%>
 </body>
 </html>

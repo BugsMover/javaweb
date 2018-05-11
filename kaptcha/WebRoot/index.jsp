@@ -1,12 +1,10 @@
 <%@ page language="java" pageEncoding="UTF-8"%>
 <!DOCTYPE HTML>
 <html>
-    <head>
-        <title>显示KaptchaServlet生成的验证码</title>
-        <script type="text/javascript"
-            src="${pageContext.request.contextPath}/js/jquery-1.9.1.min.js"></script>
-
-        <script type="text/javascript">        
+  <head>
+    <title>显示KaptchaServlet生成的验证码</title>
+    <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-1.9.1.js"></script>
+    <script type="text/javascript">
         //点击切换验证码
         function changeVerifyCode(){
             $("#yzmImg").attr("src","Kaptcha.jpg?"+Math.floor(Math.random()*100));
@@ -38,31 +36,30 @@
             }
         }
     </script>
-    </head>
-
-    <body>
-        <form>
-            <table>
-                <tr>
-                    <td>
+  </head>
+  
+  <body>
+       <form>
+        <table>
+            <tr>
+                <td>    
                         请输入验证码：
-                    </td>
-                    <td>
-                        <input type="text" name="verifyCode" id="verifyCode">
-                        <img src="Kaptcha.jpg" onclick="changeVerifyCode()" id="yzmImg"
-                            style="cursor: pointer;">
-                        <a href="javascript:void(0)" onclick="changeVerifyCode()">看不清，换一张</a>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        &nbsp;
-                    </td>
-                    <td>
-                        <input type="button" value="提交" onclick="doSubmit()">
-                    </td>
-                </tr>
-            </table>
-        </form>
-    </body>
+                </td>
+                <td>
+                    <input type="text" name="verifyCode" id="verifyCode">
+                    <img src="Kaptcha.jpg" onclick="changeVerifyCode()" id="yzmImg" style="cursor: pointer;">
+                    <a href="javascript:void(0)" onclick="changeVerifyCode()">看不清，换一张</a>
+                </td>
+            </tr>
+            <tr>
+                <td>    
+                    &nbsp;
+                </td>
+                <td>
+                    <input type="button" value="提交" onclick="doSubmit()">
+                </td>
+            </tr>
+        </table>
+    </form>    
+  </body>
 </html>
