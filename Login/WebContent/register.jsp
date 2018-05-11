@@ -1,10 +1,12 @@
-<!DOCTYPE html>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<meta charset="UTF-8">
-<title>注册页面</title>
-  </head>
-  <script type="text/javascript">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Insert title here</title>
+</head>
+<script type="text/javascript">
         function checkForm() {
 		var usernametip = checkusername();
 		var passwordtip = checkpassword();
@@ -24,7 +26,7 @@
     	  }else if(!pattern.test(username.value)){
     		  usernamespan.innerHTML="用户名不规范！"
     		  return false;
-    	  }else{
+    	  }else {
     		  usernamespan.innerHTML="OK"
     		  return true;
     	  }
@@ -68,10 +70,22 @@
     		  return true;
     	  }
       }
+      function checkemail(){
+    	  var email = document.getElementById('email');
+    	  var emailspan = document.getElementById('emailspan');
+    	  var pattern = /^[1-9a-zA-Z_]\w*@[a-zA-Z0-9]+(\.[a-zA-Z]{2,})+$/; //验证邮箱正则表达式
+    	  if(!pattern.test(email.value)){
+    		  emailspan.innerHTML = "E-mail不规范"
+    		  return false;
+    	  }else{
+    		  emailspan.innerHTML = "OK"
+    		  return true;
+    	  }
+      }
         
   </script>
-  <body>
-		<form action="#" onSubmit="return checkForm()" method="post">
+<body>
+<form action="#" onSubmit="return checkForm()" method="post">
 			用户名：<input type="text" id="username" class="username" maxlength="20" onBlur="checkusername()" oninput="checkusername()" required><span class="default" id="usernamespan">请输入3位用户名</span><br> 
 			密    码：<input type="password" id="password"  maxlength="16" onBlur="checkpassword()" oninput="checkpassword()" required><span class=default id="passwordspan">请输入至少8到16位密码</span><br> 
 			确认密码：<input type="password" id="repassword" maxlength="16" onBlur="checkrepasswork" oninput="checkrepassword()" required><span class="default" id="repasswordspan">请再输入一遍密码</span><br>
@@ -81,7 +95,7 @@
 			onkeyup="this.value=this.value.replace(/\D/g,'')" onBlur="checkage()"><span></span><br> 
 			手机号码：<input type="number" id="phonenumber" maxlength="11"
 			onkeyup="this.value=this.value.replace(/\D/g,'')" onBlur="checkphonenumber()" oninput="checkphonenumber()" ><span id="phonenumberspan">请输入11位手机号码</span><br>
-			电子邮箱：<input type="email" id="email" maxlength="30" onBlur="checkemail()" ><span>请输入邮箱地址</span><br> 
+			电子邮箱：<input type="email" id="email" maxlength="30" onBlur="checkemail()" oninput="checkemail()"><span id="emailspan">请输入邮箱地址</span><br> 
 			验证码：<input type="text" id="yzmimg" size="4" maxlength="4" required><span></span><img alt="" src=""><br> 
 			<input type="radio" id="terms" required>我同意XXXX相关条款<br>
 			<textarea rows="6" cols="80" readonly="readonly">
