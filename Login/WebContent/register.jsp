@@ -16,7 +16,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		var agetip = checkage();
 		var phonenumbertip = checkphonenumber();
 		var emailtip = checkemail();
-		var kaptchatip = chenckkaptcha();
+		var kaptchatip = checkkaptcha();
 		return usernametip && passwordtip && repasswordtip  && agetip && phonenumbertip && emailtip && kaptchatip;
 	}
       function checkusername(){
@@ -87,7 +87,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
       }
       function refImg(){
     	  //验证码切换
-    		document.getElementById("kaptchaimg").src="<%=basePath%>Kaptcha.jpg?data="+Math.random();
+    		document.getElementById("kaptcha").src="<%=basePath%>Kaptcha.jpg?data="+Math.random();
     	}
      /** function checkkaptcha(){
     	  //验证码检验
