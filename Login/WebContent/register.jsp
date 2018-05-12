@@ -16,8 +16,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		var agetip = checkage();
 		var phonenumbertip = checkphonenumber();
 		var emailtip = checkemail();
-		var kaptchatip = checkkaptcha();
-		return usernametip && passwordtip && repasswordtip  && agetip && phonenumbertip && emailtip && kaptchatip;
+		return usernametip && passwordtip && repasswordtip  && agetip && phonenumbertip && emailtip ;
 	}
       function checkusername(){
     	  var username = document.getElementById('username');
@@ -94,25 +93,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     		document.getElementById("Kaptcha").src="<%=basePath%>Kaptcha.jpg?data="+Math.random();
     	}
       
-      function checkkaptcha(){
-    	  //验证码检验
-    	  <% String key = (String)session.getAttribute(com.google.code.kaptcha.Constants.KAPTCHA_SESSION_KEY); %>
-    	  var kaptcha = document.getElementById("kaptcha");
-    	  var kaptchaspan = document.getElementById("kaptchaspan");
-    	  if(key!=null && kaptcha != null){
-    		  if(key.equalsIgnoreCase(kaptcha)){
-    			  kaptchaspan.innerHTML = "OK"
-    			  return true;
-    		  }else{
-    			  kaptchaspan.innerHTML = "验证码有误！"
-    			  return false;
-    		  }
-    	  }else{
-    		  kaptchaspan.innerHTML = "验证码不能为空！"
-    		  return false;
-    	  }
-      }
-        
   </script>
 <body>
 <form action="#" onSubmit="return checkForm()" method="post">
