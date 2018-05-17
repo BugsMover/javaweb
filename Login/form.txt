@@ -1,0 +1,21 @@
+username varchar(30) PRIMARY KEY NOT NULL
+password sha1 varchar(30) NOT NULL
+phonenumber varchar(30)
+email varchar(30)
+
+drop database db_form;
+create database db_form;
+use db_form;
+
+create table user(
+           username varchar(30) PRIMARY KEY,
+           password varchar(30) not null,
+           phonenumber varchar(30) ,
+           email varchar(30)
+           
+);
+
+insert into user(username,password,phonenumber,email) values('admin','admin','13422619347','734690050@qq.com');
+
+desc user;
+select * from user;

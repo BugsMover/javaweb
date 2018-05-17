@@ -93,6 +93,19 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     		document.getElementById("Kaptcha").src="<%=basePath%>Kaptcha.jpg?data="+Math.random();
     	}
       
+//      function checkkaptcha(){
+//    	  <%--String c = (String)session.getAttribute(com.google.code.kaptcha.Constants.KAPTCHA_SESSION_KEY);--%>
+//    	  var kaptcha = document.getElementById('kaptcha');
+//    	  var kaptchaspan = document.getElementById('kaptchaspan');
+//    	  if(!.test(kaptcha.value)){
+//    		  kaptchaspan.innerHTML = "验证码错误！"
+//    		  return false;
+//    	  }else{
+//    		  kaptchaspan.innerHTML = "OK"
+//    		  return true;
+//   	  }
+      }
+      
   </script>
 <body>
 <form action="#" onSubmit="return checkForm()" method="post">
@@ -137,7 +150,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			</textarea><br>
 			<input type="submit" value="提交" ><input type="reset" value="重置">
 		</form>
-		<%
+		<%--
 			String c = (String)session.getAttribute(com.google.code.kaptcha.Constants.KAPTCHA_SESSION_KEY);
 			String parm = (String) request.getParameter("kaptcha");
 			out.println("Parameter: " + parm + " ? Session Key: " + c + " : ");
@@ -148,6 +161,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					out.println("<b>false</b>");
 				}
 			}
-		%>
+		--%>
 </body>
 </html>

@@ -5,7 +5,6 @@
     http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
     <!-- kaptcha验证码配置 -->
     <servlet>
-        <!-- 生成图片的Servlet -->
         <servlet-name>Kaptcha</servlet-name>
         <servlet-class>
             com.google.code.kaptcha.servlet.KaptchaServlet
@@ -67,16 +66,16 @@
 
     <!-- 检查验证码是否输入正确 -->
     <servlet>
-        <servlet-name>VerifyServlet</servlet-name>
-        <servlet-class>
-            me.gacl.web.controller.VerifyServlet
-        </servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>VerifyServlet</servlet-name>
-        <url-pattern>/servlet/VerifyServlet</url-pattern>
-    </servlet-mapping>
-
+         <!-- 表单验证 -->
+        <servlet-name>Check</servlet-name>
+        <servlet-class>src.CheckServlet</servlet-class>
+        <!-- 生成图片的Servlet -->
+     </servlet>
+     
+     <servlet-mapping>
+          <servlet-name>Check</servlet-name>
+          <url-pattern>/CheckServlet</url-pattern>
+     </servlet-mapping>
 
     <welcome-file-list>
         <welcome-file>register.jsp</welcome-file>
