@@ -64,12 +64,10 @@
     </servlet-mapping>
 
 
-    <!-- 检查验证码是否输入正确 -->
     <servlet>
          <!-- 表单验证 -->
         <servlet-name>Check</servlet-name>
-        <servlet-class>src.CheckServlet</servlet-class>
-        <!-- 生成图片的Servlet -->
+        <servlet-class>ajax.CheckServlet</servlet-class>
      </servlet>
      
      <servlet-mapping>

@@ -9,30 +9,59 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <title>Insert title here</title>
 </head>
 <script type="text/javascript">
+        var xmlHttp ;
+        var flag = false;
+        function createXMLHttp() {
+			if(window.XMLHttpRequest){
+				xmlHttp = new XMLHttpRequest();
+			}else{
+				xmlHttp = new ActiveXObject("Microsoft.XMLHTTP");
+			}
+		}
         function checkForm() {
-		var usernametip = checkusername();
-		var passwordtip = checkpassword();
-		var repasswordtip = checkrepassword();
-		var agetip = checkage();
-		var phonenumbertip = checkphonenumber();
-		var emailtip = checkemail();
-		return usernametip && passwordtip && repasswordtip  && agetip && phonenumbertip && emailtip ;
-	}
-      function checkusername(){
-    	  var username = document.getElementById('username');
+		//var usernametip = checkusername();
+		//var passwordtip = checkpassword();
+		//var repasswordtip = checkrepassword();
+		//var agetip = checkage();
+		//var phonenumbertip = checkphonenumber();
+		//var emailtip = checkemail();
+		//return usernametip && passwordtip && repasswordtip  && agetip && phonenumbertip && emailtip ;
+		return flag;
+	}  
+      function checkusername(username){
+          var username = document.getElementById('username');
     	  var usernamespan = document.getElementById('usernamespan')
     	  var pattern = /^[0-9a-zA-Z\u4e00-\u9fa5_]{3,16}$/;  //用户名格式正则表达式：用户名要至少三位
     	  if(username.value.length == 0){
     		  usernamespan.innerHTML="用户名不能为空！"
-    		 return false;
+    		  flag = false;
     	  }else if(!pattern.test(username.value)){
     		  usernamespan.innerHTML="用户名不规范！"
-    		  return false;
+    		  flag = false;
     	  }else {
-    		  usernamespan.innerHTML="OK"
-    		  return true;
+    		  //usernamespan.innerHTML="OK"
+        	  createXMLHttp();
+        	  xmlHttp.open("POST","CheckServlet?username="+username);
+    		  xmlHttp.onreadystatechange = checkusernameCallback;
+    		  xmlHttp.send(null);
+    		  usernamespan.innerHTML = "正在验证...";
     	  }
       }
+    	  function checkusernameCallback(){
+    		  if(xmlHttp.readyState == 4){
+    			  if(xmlHttp.status ==200){
+    				  var text = xmlHttp.responseText;
+    				  if(text =="ture"){//用户已经存在
+    					 document.getElementById("usernamespan").innerHTML = "用户名重复，无法使用！";
+    					 flag = false ;
+    				  }else {
+    					  document.getElementById("usernamespan").innerHTML = "OK";
+    					  flag = true ;
+    				  }
+    			  }
+    		  }
+    	  }
+      
       function checkpassword(){
     	  var password = document.getElementById('password');
     	  var passwordspan = document.getElementById('passwordspan');
@@ -93,33 +122,18 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     		document.getElementById("Kaptcha").src="<%=basePath%>Kaptcha.jpg?data="+Math.random();
     	}
       
-//      function checkkaptcha(){
-//    	  <%--String c = (String)session.getAttribute(com.google.code.kaptcha.Constants.KAPTCHA_SESSION_KEY);--%>
-//    	  var kaptcha = document.getElementById('kaptcha');
-//    	  var kaptchaspan = document.getElementById('kaptchaspan');
-//    	  if(!.test(kaptcha.value)){
-//    		  kaptchaspan.innerHTML = "验证码错误！"
-//    		  return false;
-//    	  }else{
-//    		  kaptchaspan.innerHTML = "OK"
-//    		  return true;
-//   	  }
-      }
+      
       
   </script>
 <body>
 <form action="#" onSubmit="return checkForm()" method="post">
-			用户名：<input type="text" id="username" class="username" maxlength="20" onBlur="checkusername()" oninput="checkusername()" required><span class="default" id="usernamespan">请输入3位用户名</span><br> 
-			密    码：<input type="password" id="password"  maxlength="16" onBlur="checkpassword()" oninput="checkpassword()" required><span class=default id="passwordspan">请输入至少8到16位密码</span><br> 
-			确认密码：<input type="password" id="repassword" maxlength="16" onBlur="checkrepasswork" oninput="checkrepassword()" required><span class="default" id="repasswordspan">请再输入一遍密码</span><br>
-			性      别：<input type="radio" id="sex">男&nbsp;
-			     <input type="radio" id="sex">女<span></span><br> 
-			年     龄：<input type="number" id="age" maxlength="3" min="0" max="150" size="3" 
-			onkeyup="this.value=this.value.replace(/\D/g,'')" onBlur="checkage()"><span></span><br> 
+			用户名：<input type="text" id="username" class="username" maxlength="20" onBlur="checkusername(this.value)"  required><span class="default" id="usernamespan">请输入3位用户名</span><br> 
+			密    码：<input type="password" id="password"  maxlength="16" onBlur="checkpassword()"  required><span class=default id="passwordspan">请输入至少8到16位密码</span><br> 
+			确认密码：<input type="password" id="repassword" maxlength="16" onBlur="checkrepasswork"  required><span class="default" id="repasswordspan">请再输入一遍密码</span><br>
 			手机号码：<input type="number" id="phonenumber" maxlength="11"
-			onkeyup="this.value=this.value.replace(/\D/g,'')" onBlur="checkphonenumber()" oninput="checkphonenumber()" ><span id="phonenumberspan">请输入11位手机号码</span><br>
-		 	电子邮箱：<input type="email" id="email" maxlength="30" onBlur="checkemail()" oninput="checkemail()"><span id="emailspan">请输入邮箱地址</span><br> 
-			验证码：<input type="text"  id="kaptcha" size="4" maxlength="4" onBlur="checkkaptcha()" oninput="checkkaptcha()" required><span id="kaptchaspan">!!!</span>
+			onkeyup="this.value=this.value.replace(/\D/g,'')" onBlur="checkphonenumber()"  ><span id="phonenumberspan">请输入11位手机号码</span><br>
+		 	电子邮箱：<input type="email" id="email" maxlength="30" onBlur="checkemail()" ><span id="emailspan">请输入邮箱地址</span><br> 
+			验证码：<input type="text"  id="kaptcha" size="4" maxlength="4" onBlur="checkkaptcha()"  required><span id="kaptchaspan">!!!</span>
 			<img id="Kaptcha" src="<%=basePath%>Kaptcha.jpg" onclick="refImg()"><a href="javascript:void(0)" onclick="refImg()">看不清，点击刷新！</a><br> 
 			<input type="radio" id="terms" required>我同意XXXX相关条款<br>
 			<textarea rows="6" cols="80" readonly="readonly">
@@ -150,17 +164,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			</textarea><br>
 			<input type="submit" value="提交" ><input type="reset" value="重置">
 		</form>
-		<%--
-			String c = (String)session.getAttribute(com.google.code.kaptcha.Constants.KAPTCHA_SESSION_KEY);
-			String parm = (String) request.getParameter("kaptcha");
-			out.println("Parameter: " + parm + " ? Session Key: " + c + " : ");
-			if (c != null && parm != null) {
-				if (c.equalsIgnoreCase(parm)) {
-					out.println("<b>true</b>");
-				} else {
-					out.println("<b>false</b>");
-				}
-			}
-		--%>
+
 </body>
 </html>
