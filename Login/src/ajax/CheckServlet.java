@@ -29,6 +29,7 @@ public class CheckServlet extends HttpServlet{
 		PrintWriter out = response.getWriter();
 		String username = request.getParameter("username");
 		try {
+			
 			Class.forName(DBDRIVER);
 			conn = DriverManager.getConnection(DBURL, DBUSER, DBPASS);
 			String sql = "SELECT COUNT(username) FROM user WHERE username = ?";
@@ -36,7 +37,7 @@ public class CheckServlet extends HttpServlet{
 			pstmt.setString(1, username);
 			rs = pstmt.executeQuery();
 			if(rs.next()) {
-				if(rs.getInt(1)>0) {//用户ID已经存在
+				if(rs.getInt(1)>0) {//?
 					out.print("true");
 				}else {
 					out.print("false");
