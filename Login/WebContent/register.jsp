@@ -140,11 +140,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <body>
 <form action="#" onSubmit="return checkForm()" method="post">
 			用户名：<input type="text" id="username" class="username" maxlength="20" onBlur="checkusername(this.value)"  required><span class="default" id="usernamespan">请输入3-16位用户名</span><br> 
-			密    码：<input type="password" id="password"  maxlength="16" onBlur="checkpassword()"  required><span class=default id="passwordspan">请输入至少8到16位密码</span><br> 
+			密    码：<input type="password" id="password"  maxlength="16" onBlur="checkpassword()"  required><span class=default id="passwordspan">请输入至少6到16位密码</span><br> 
 			确认密码：<input type="password" id="repassword" maxlength="16" onBlur="checkrepassword()"  required><span class="default" id="repasswordspan">请再输入一遍密码</span><br>
 			手机号码：<input type="number" id="phonenumber" maxlength="11" onBlur="checkphonenumber()"  ><span id="phonenumberspan">请输入11位手机号码</span><br>
 		 	电子邮箱：<input type="email" id="email" maxlength="30" onBlur="checkemail()" ><span id="emailspan">请输入邮箱</span><br> 
-			验证码：<input type="text"  id="kaptcha" size="4" maxlength="4" onBlur="checkkaptcha(this.value)"  required><span id="kaptchaspan"></span><br>
+			验证码：<input type="text"  id="kaptcha" size="4" maxlength="4" onBlur="checkkaptcha(this.value)"  required><span id="kaptchaspan">不区分大小写</span><br>
 			<img id="Kaptcha" src="<%=basePath%>Kaptcha.jpg" onclick="refImg()">
 			<a href="javascript:void(0)" onclick="refImg()">看不清，点击刷新！</a><br> 
 			<input type="radio" id="terms" required>我同意XXXX相关条款<br>
