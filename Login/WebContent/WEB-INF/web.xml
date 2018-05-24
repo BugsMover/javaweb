@@ -74,7 +74,17 @@
           <servlet-name>Check</servlet-name>
           <url-pattern>/CheckServlet</url-pattern>
      </servlet-mapping>
-
+     
+     <!-- 验证码 -->
+     <servlet>
+           <servlet-name>Check_Yzm</servlet-name>
+           <servlet-class>ajax.YzmCheckServlet</servlet-class>
+     </servlet>
+     <servlet-mapping>
+     <servlet-name>Check_Yzm</servlet-name>
+     <url-pattern>/YzmCheckServlet</url-pattern>
+     </servlet-mapping>
+     
     <welcome-file-list>
         <welcome-file>register.jsp</welcome-file>
     </welcome-file-list>

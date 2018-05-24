@@ -26,7 +26,8 @@ public class CheckServlet extends HttpServlet{
 		PreparedStatement pstmt;
 		ResultSet rs;
 		String username = request.getParameter("username");
-		System.out.println("网页回传用户名："+username);
+	//	System.out.println("网页回传用户名："+username);
+		if(username.length()>=3 && username.length()<=16) {
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
 		} catch (ClassNotFoundException e) {
@@ -41,14 +42,14 @@ public class CheckServlet extends HttpServlet{
 			System.out.println("获取数据库连接失败！");
 			e.printStackTrace();
 		}
-		String sql = "select * from user where username=?";
+		String sql = "select count(username) from user where username=?";
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, username);
 			rs = pstmt.executeQuery();
 			System.out.println("来自数据库："+rs);
 			if(rs.next()) {
-				if(rs.getString(1).equals(username)) {
+				if(rs.getInt(1) >= 1) {
 					System.out.println("!"+rs.getString(1));
 				   response.getWriter().print("true");
 				   System.out.println("true");
@@ -72,5 +73,9 @@ public class CheckServlet extends HttpServlet{
                 conn=null;  
             }  
         }  
+	 }else {
+		 response.getWriter().print("length");
+			//System.out.println("length");
+	 }
 	}
 }
