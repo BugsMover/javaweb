@@ -19,42 +19,40 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			}
 		}
         function checkForm() {
-		//var usernametip = checkusername();
-		//var passwordtip = checkpassword();
-		//var repasswordtip = checkrepassword();
-		//var agetip = checkage();
-		//var phonenumbertip = checkphonenumber();
-		//var emailtip = checkemail();
-		//return usernametip && passwordtip && repasswordtip  && agetip && phonenumbertip && emailtip ;
 		return flag;
 	}  
+        
+     function checkusername2(){
+    	 var username = document.getElementById('username');
+   	  var usernamespan = document.getElementById('usernamespan')
+   	  var pattern = /^[0-9a-zA-Z\u4e00-\u9fa5_]{3,16}$/;  //用户名格式正则表达式：用户名要至少三位
+   	  if(username.value.length == 0){
+   		  usernamespan.innerHTML="用户名不能为空！"
+   		  return false;
+   	  }else if(!pattern.test(username.value)){
+   		  usernamespan.innerHTML="用户名不规范！"
+   		  return false;
+   	  }
+     }
+        
       function checkusername(username){
-          var username = document.getElementById('username');
-    	  var usernamespan = document.getElementById('usernamespan')
-    	  var pattern = /^[0-9a-zA-Z\u4e00-\u9fa5_]{3,16}$/;  //用户名格式正则表达式：用户名要至少三位
-    	  if(username.value.length == 0){
-    		  usernamespan.innerHTML="用户名不能为空！"
-    		  flag = false;
-    	  }else if(!pattern.test(username.value)){
-    		  usernamespan.innerHTML="用户名不规范！"
-    		  flag = false;
-    	  }else {
-    		  //usernamespan.innerHTML="OK"
+    	      checkusername2();
         	  createXMLHttp();
         	  xmlHttp.open("POST","CheckServlet?username="+username);
     		  xmlHttp.onreadystatechange = checkusernameCallback;
     		  xmlHttp.send(null);
     		  usernamespan.innerHTML = "正在验证...";
-    	  }
       }
+     
     	  function checkusernameCallback(){
     		  if(xmlHttp.readyState == 4){
     			  if(xmlHttp.status ==200){
     				  var text = xmlHttp.responseText;
-    				  if(text =="ture"){//用户已经存在
+    				  window.alert(text); 
+    				  if(text =="true"){//用户已经存在
     					 document.getElementById("usernamespan").innerHTML = "用户名重复，无法使用！";
     					 flag = false ;
-    				  }else {
+    				  }else if(text =="false") {
     					  document.getElementById("usernamespan").innerHTML = "OK";
     					  flag = true ;
     				  }
