@@ -18,13 +18,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			}
 		}
         function checkForm() {
-        	var checkusername = checkusername();
+        	var checkusernameCallback = checkusernameCallback();
         	var checkpassword = checkpassword();
         	var checkrepassword = checkrepassword();
         	var checkphonenumber = checkphonenumber();
         	var checkemail = checkemail();
-        	var checkkaptcha = checkkaptcha();
-		return checkusername && checkpassword && checkrepassword && checkphonenumber && checkemail && checkkaptcha;
+        	var checkkaptchaCallback = ccheckkaptchaCallback();
+		return checkusernameCallback && checkpassword && checkrepassword && checkphonenumber && checkemail && checkkaptchaCallback;
 	}  
                
       function checkusername(username){
@@ -127,10 +127,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				 // window.alert(text); 
 				  if(text =="yes"){//验证码相同
 					 document.getElementById("kaptchaspan").innerHTML = "OK";
-					 flag = true ;
+					 return true ;
 				  }else if(text =="no"){ 
 					  document.getElementById("kaptchaspan").innerHTML = "验证码错误！";
-					  flag = true ;
+					  return true ;
 				  }
 			    }
 			  }
