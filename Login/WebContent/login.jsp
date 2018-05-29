@@ -7,11 +7,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<title>登录</title>
 </head>
 <script type="text/javascript">
         var xmlHttp;
-        function creareXMLHttp(){
+        function createXMLHttp(){
                 if(window.XMLHttpRequest){
                 	xmlHttp = new XMLHttpRequest();
                 }else{
@@ -24,7 +24,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		}
 		
 		function check(){
-			return ;
+			var checkyzmCallback = checkyzmCallback()
+			var checkname = checkname()
+			var checkpass = checkpass()
+			return checkyzmCallback && checkname && checkpass;
 		}
 		
 		function checkyzm(yzminput){
@@ -37,6 +40,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		function checkyzmCallback(){
 			if(xmlHttp.readyState ==4 ){
 				if(xmlHttp.status ==200){
+					var text = xmlHttp.responseText;
+					//window.alert(text);
 					if(text == "yes"){
 						document.getElementById("yzmspan").innerHTML = "OK"
 						return true;
@@ -47,15 +52,44 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				}
 			}
 		}
-		
+		function checkname(){
+			var name = document.getElementById('name');
+			var namespan = document.getElementById('namespan')
+			var pattern = /^\w{3,16}$/;
+			if(name.value.length==0){
+				namespan.innerHTML = "用户名不能为空！"
+				return false;
+			}else if(!pattern.test(name.value)){
+				namespan.innerHTML = "请输入3到16位的用户名！"
+				return false;
+			}else{
+				namespan.innerHTML = "OK"
+				return true;
+			}
+		}
+		function checkpass(){
+			var pass = document.getElementById('pass');
+			var passspan = document.getElementById('passspan')
+			var pattern = /^\w{6,16}$/;
+			if(pass.value.length==0){
+				passspan.innerHTML = "密码不能为空！"
+				return false;
+			}else if(!pattern.test(pass.value)){
+				passspan.innerHTML = "请输入6到16位的密码！"
+				return false;
+			}else{
+				passspan.innerHTML = "OK"
+				return true;
+			}
+		}
 		
 </script>
 <body>
 <form action="loginservlet" method="post" onsubmit="return check()">
-               账号：<input type="text" id="username" maxlength="20" onblur="checkusername()" required><span></span><br/>
-               密码：<input type="password" id="password" maxlength="20" onblur = "checkpassword()" required><span id=""></span><br>
+             用户名：<input type="text" id="name" maxlength="16" onBlur="checkname()" required><span id="namespan"></span><br/>
+               密 码：<input type="password" id="pass" maxlength="20" onblur = "checkpass()" required><span id="passspan"></span><br>
          验证码：<img id="Kaptcha" src="<%=basePath%>Kaptcha.jpg" onclick="refImg()" ><a href="javascript:void(0)" onclick="refImg()">看不清，点击刷新</a><br>
-         <input type = "text" id="yzminput" onBlur="checkyzm(this.value)"  maxlength="4" required>
+         &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<input type = "text" id="yzminput" onBlur="checkyzm(this.value)"  maxlength="4" required>
          <span id="yzmspan">  </span>
           <input type="submit" value="提交">
           <input type="button" onclick="window.location.href='register.jsp'" value="注册">
