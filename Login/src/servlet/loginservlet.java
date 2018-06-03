@@ -7,7 +7,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.nsz.mvc.servlet.String;
 
 public class loginservlet extends HttpServlet{
     public void doGet(HttpServletRequest request,HttpServletResponse response)throws ServletException,IOException{

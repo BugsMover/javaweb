@@ -11,14 +11,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 </head>
 <script type="text/javascript">
         var xmlHttp;
-        function createXMLHttp(){
                 if(window.XMLHttpRequest){
                 	xmlHttp = new XMLHttpRequest();
                 }else{
                 	xmlHttp = new ActiveXObject("Microsoft.XMLHTTP");
                 }	
-        }
         
+    
 		function refImg(){
 			document.getElementById("Kaptcha").src="<%=basePath%>Kaptcha.jpg?data="+Math.random();
 		}
@@ -31,7 +30,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		}
 		
 		function checkyzm(yzminput){
-			createXMLHttp();
+			//createXMLHttp();
 			xmlHttp.open("POST","YzmCheckServlet?kaptcha="+yzminput);
 			xmlHttp.onreadystatechange = checkyzmCallback;
 			xmlHttp.send(null);
@@ -86,11 +85,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 </script>
 <body>
 <form action="loginservlet" method="post" onsubmit="return check()">
-             用户名：<input type="text" id="name" maxlength="16" onBlur="checkname()" required><span id="namespan"></span><br/>
-               密 码：<input type="password" id="pass" maxlength="20" onblur = "checkpass()" required><span id="passspan"></span><br>
-         验证码：<img id="Kaptcha" src="<%=basePath%>Kaptcha.jpg" onclick="refImg()" ><a href="javascript:void(0)" onclick="refImg()">看不清，点击刷新</a><br>
-         &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<input type = "text" id="yzminput" onBlur="checkyzm(this.value)"  maxlength="4" required>
-         <span id="yzmspan">  </span>
+             用户名：<input type="text" id="name" maxlength="16" size="16" onBlur="checkname()" required><span id="namespan"></span><br/>
+               密&nbsp;&nbsp;&nbsp;&nbsp;码：<input type="password" id="pass" size="17" maxlength="16" onblur = "checkpass()" required><span id="passspan"></span><br>
+         验证码：<input type = "text" id="yzminput" onBlur="checkyzm(this.value)" size="4" maxlength="4" required>
+         <span id="yzmspan">不分大小写</span><br>
+         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+         <img id="Kaptcha" src="<%=basePath%>Kaptcha.jpg" onclick="refImg()" ><a href="javascript:void(0)" onclick="refImg()">看不清，点击刷新</a><br>
+         <span>&nbsp;</span><br>
+         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
           <input type="submit" value="提交">
           <input type="button" onclick="window.location.href='register.jsp'" value="注册">
      </form>
