@@ -1,3 +1,5 @@
+package sha256;
+
 import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -40,11 +42,6 @@ public class sha_256 {
 			stringBuffer.append(temp);
 		}
 		return stringBuffer.toString();
-	}
-
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-       System.out.println(getSHA256Strjava("admin"));
 	}
 
 }
