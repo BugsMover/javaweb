@@ -88,7 +88,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
          <span id="yzmspan">不分大小写</span><br>
          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
          <img id="Kaptcha" src="<%=basePath%>Kaptcha.jpg" onclick="refImg()" ><a href="javascript:void(0)" onclick="refImg()">看不清，点击刷新</a><br>
-         <span>&nbsp;</span><br>
+         <span>...........</span><br>
          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
           <input type="submit" value="提交">
           <input type="button" onclick="window.location.href='register.jsp'" value="注册">

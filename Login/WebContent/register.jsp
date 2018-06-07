@@ -18,13 +18,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			}
 		}
         function checkForm() {
-        	var checkusernameCallback = checkusernameCallback();
-        	var checkpassword = checkpassword();
-        	var checkrepassword = checkrepassword();
-        	var checkphonenumber = checkphonenumber();
-        	var checkemail = checkemail();
-        	var checkkaptchaCallback = ccheckkaptchaCallback();
-		return checkusernameCallback && checkpassword && checkrepassword && checkphonenumber && checkemail && checkkaptchaCallback;
+		return checkusernameCallback() 
+		      && checkpassword() 
+		      && checkrepassword() 
+		      && checkphonenumber() 
+		      && checkemail() 
+		      && checkkaptchaCallback();
 	}  
                
       function checkusername(username){
