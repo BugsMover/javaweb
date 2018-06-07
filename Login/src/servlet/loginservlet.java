@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import factory.Daofactory;
+import sha256.sha_256;
 import vo.User;
 
 
@@ -32,13 +33,14 @@ public class loginservlet extends HttpServlet{
     	}
     	if(info.size()==0) {
     		User user = new User();
-    		user.setUsername(name);
+    		sha_256 sha = new sha_256();
+    		user.setUsername(sha.getSHA256Strjava(name));
     		user.setPassword(pass);
     		try {
 				if(Daofactory.getUserDaoInstance().findLogin(user)) {
 				info.add("用户登录成功，欢迎"+user.getUsername()+"光临！");
 				}else {
-					info.add("用户登录失败，错误的用户名和密码！")；
+					info.add("用户登录失败，错误的用户名和密码！");
 				}
 			} catch (Exception e) {
 				// TODO Auto-generated catch block

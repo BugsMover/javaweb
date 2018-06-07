@@ -15,7 +15,7 @@ public class YzmCheckServlet extends HttpServlet{
 	   request.setCharacterEncoding("UTF-8");
 	   response.setContentType("text/html");
 	   String kaptcha= request.getParameter("kaptcha");
-	   System.out.println("网页回传验证码："+kaptcha);
+	   //System.out.println("网页回传验证码："+kaptcha);
 	   String c = (String) request.getSession().getAttribute(com.google.code.kaptcha.Constants.KAPTCHA_SESSION_KEY);
 	   //System.out.println("验证码："+c);
 	  if(kaptcha.length()<=3 || !kaptcha.equalsIgnoreCase(c)) {

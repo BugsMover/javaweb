@@ -22,11 +22,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			document.getElementById("Kaptcha").src="<%=basePath%>Kaptcha.jpg?data="+Math.random();
 		}
 		
-		function check(){
-			var checkyzmCallback = checkyzmCallback()
-			var checkname = checkname()
-			var checkpass = checkpass()
-			return checkyzmCallback && checkname && checkpass;
+		function check(){	
+			return checkyzmCallback() && checkname() && checkpass();
 		}
 		
 		function checkyzm(yzminput){
@@ -46,7 +43,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						return true;
 					}else if(text == "no"){
 						document.getElementById("yzmspan").innerHTML = "验证码错误！"
-						return true;
+						return false;
 					}
 				}
 			}
@@ -69,7 +66,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		function checkpass(){
 			var pass = document.getElementById('pass');
 			var passspan = document.getElementById('passspan')
-			var pattern = /^\w{6,16}$/;
+			var pattern = /^\w{5,16}$/;
 			if(pass.value.length==0){
 				passspan.innerHTML = "密码不能为空！"
 				return false;

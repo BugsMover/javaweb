@@ -138,7 +138,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
       
   </script>
 <body>
-<form action="#" onSubmit="return checkForm()" method="post">
+<form action="loginsservlet" onSubmit="return checkForm()" method="post">
 			用户名：<input type="text" id="username" class="username" maxlength="16" onBlur="checkusername(this.value)"  required><span class="default" id="usernamespan">请输入3-16位用户名</span><br> 
 			密    码：<input type="password" id="password"  maxlength="16" onBlur="checkpassword()"  required><span class=default id="passwordspan">请输入至少6到16位密码</span><br> 
 			确认密码：<input type="password" id="repassword" maxlength="16" onBlur="checkrepassword()"  required><span class="default" id="repasswordspan">请再输入一遍密码</span><br>

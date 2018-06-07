@@ -85,6 +85,23 @@
      <url-pattern>/YzmCheckServlet</url-pattern>
      </servlet-mapping>
      
+     <servlet>
+         <servlet-name>login</servlet-name>
+         <servlet-class>servlet.loginservlet</servlet-class>
+     </servlet>
+     <servlet-mapping>
+          <servlet-name>login</servlet-name>
+          <url-pattern>/loginservlet</url-pattern>
+     </servlet-mapping>
+          <servlet>
+         <servlet-name>insert</servlet-name>
+         <servlet-class>servlet.insertservlet</servlet-class>
+     </servlet>
+     <servlet-mapping>
+          <servlet-name>insert</servlet-name>
+          <url-pattern>/insertservlet</url-pattern>
+     </servlet-mapping>
+     
     <welcome-file-list>
         <welcome-file>register.jsp</welcome-file>
     </welcome-file-list>
